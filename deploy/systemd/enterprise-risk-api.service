@@ -1,0 +1,32 @@
+# /etc/systemd/system/enterprise-risk-api.service
+[Unit]
+Description=Enterprise Risk API
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=riskapi
+Group=riskapi
+WorkingDirectory=/opt/enterprise-risk-api
+Environment="AUTH0_ISSUER_URI=https://YOUR_TENANT.us.auth0.com/"
+Environment="AUTH0_AUDIENCE=https://enterprise-risk-api"
+Environment="CORS_ALLOWED_ORIGINS=https://YOUR-SUBDOMAIN.duckdns.org"
+# Listen on loopback only: Apache is the single public entry point.
+Environment="SERVER_ADDRESS=127.0.0.1"
+ExecStart=/usr/bin/java -jar /opt/enterprise-risk-api/app.jar
+Restart=always
+RestartSec=5
+
+# Least-privilege sandboxing for the service process.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+ReadWritePaths=/opt/enterprise-risk-api
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,27 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color-scheme: light dark;
+}
+
+main {
+  max-width: 40rem;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+button {
+  margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
+  font: inherit;
+  cursor: pointer;
+}
+
+pre {
+  margin-top: 1.5rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.error {
+  color: #c0392b;
+}
